@@ -31,8 +31,10 @@ namespace BuyingAgentBackEnd
             builder.AddInMemoryCollection(DbCon.GetAwsDbConfig(builder.Build()));
 
             Configuration = builder.Build();
-
-            //Configuration = configuration;
+            //development version
+             //var builder = new ConfigurationBuilder()
+             //.SetBasePath(Directory.GetCurrentDirectory())
+             //.AddJsonFile("appsettings.json");
 
         }
 
