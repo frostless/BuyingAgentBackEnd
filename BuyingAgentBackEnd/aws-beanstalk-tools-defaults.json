@@ -11,5 +11,6 @@
     "instance-type"    : "t2.micro",
     "key-pair"         : "",
     "iis-website"      : "Default Web Site",
-    "app-path"         : "/"
+    "app-path"         : "/",
+    "enable-xray"      : false
 }
