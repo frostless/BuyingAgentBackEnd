@@ -79,10 +79,10 @@ namespace BuyingAgentBackEnd.Services
         public InitialInfoDtos GetEntities()
         {
             InitialInfoDtos resultList = new InitialInfoDtos {
-                customers = _buyingAgentContext.Customers.OrderBy(c => c.Name).ToList(),
-                posts = _buyingAgentContext.Posts.OrderBy(p => p.Brand).ToList(),
-                products = _buyingAgentContext.Products.OrderBy(p => p.Name).ToList(),
-                categories = _buyingAgentContext.Categories.OrderBy(c => c.Name).ToList()
+                customers = _buyingAgentContext.Customers.OrderBy(c => c.Id).ToList(),
+                posts = _buyingAgentContext.Posts.OrderBy(p => p.Id).ToList(),
+                products = _buyingAgentContext.Products.OrderBy(p => p.Id).ToList(),
+                categories = _buyingAgentContext.Categories.OrderBy(c => c.Id).ToList()
             };
             return resultList;
         }
@@ -208,6 +208,13 @@ namespace BuyingAgentBackEnd.Services
         public int GetVisitsNum()
         {
             return _buyingAgentContext.Visits.Count();
+        }
+
+        public ICollection<Transaction> GetAllTransactions()
+        {
+
+            return _buyingAgentContext.Transactions.OrderBy(t => t.Id).ToList();
+
         }
 
         public void DeleteEntity(int Id,string entity)

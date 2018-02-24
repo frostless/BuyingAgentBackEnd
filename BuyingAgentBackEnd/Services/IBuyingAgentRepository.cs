@@ -36,6 +36,8 @@ namespace BuyingAgentBackEnd.Services
 
         IDictionary<string, string> GetTopVisit();
 
+        ICollection<Transaction> GetAllTransactions();
+
         decimal GetallProfit();
 
         int GetTranactionsNum();
