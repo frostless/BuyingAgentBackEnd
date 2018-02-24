@@ -25,6 +25,8 @@ namespace BuyingAgentBackEnd.Entities
 
         public string BarCode { get; set; }
 
+        public decimal Profit { get; set; }
+
         public string ImgUrl { get; set; }
 
         //many-to-many relationshio to join table TransactionProduct

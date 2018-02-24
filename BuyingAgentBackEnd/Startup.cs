@@ -1,5 +1,4 @@
-﻿
-using BuyingAgentBackEnd.Entities;
+﻿using BuyingAgentBackEnd.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using BuyingAgentBackEnd.Services;
-using System.Collections.Generic;
+
 
 namespace BuyingAgentBackEnd
 {
@@ -35,7 +34,7 @@ namespace BuyingAgentBackEnd
             //.SetBasePath(Directory.GetCurrentDirectory())
             //.AddJsonFile("appsettings.json");
 
-            Configuration = builder.Build();    
+            Configuration = builder.Build();
 
         }
 
@@ -48,7 +47,7 @@ namespace BuyingAgentBackEnd
         //        string[] keypair = pair.Value.Split(new[] { '=' }, 2);
         //        dict.Add(keypair[0], keypair[1]);
         //    }
-            
+
         //    return dict;
         //}
 
@@ -84,7 +83,7 @@ namespace BuyingAgentBackEnd
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app, 
+            IApplicationBuilder app,
             IHostingEnvironment env,
             ILoggerFactory loggerFactory
             )

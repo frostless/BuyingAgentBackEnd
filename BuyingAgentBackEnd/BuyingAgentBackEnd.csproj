@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180223231430_updatedTranTbl.cs" />
+    <Compile Remove="Migrations\20180223231430_updatedTranTbl.Designer.cs" />
+    <Compile Remove="Migrations\20180223232251_uptdatedTran.cs" />
+    <Compile Remove="Migrations\20180223232251_uptdatedTran.Designer.cs" />
+    <Compile Remove="Migrations\20180223234608_initial.cs" />
+    <Compile Remove="Migrations\20180223234608_initial.Designer.cs" />
+    <Compile Remove="Migrations\20180223235823_UpdatedTran.cs" />
+    <Compile Remove="Migrations\20180223235823_UpdatedTran.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

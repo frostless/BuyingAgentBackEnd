@@ -12,10 +12,15 @@ namespace BuyingAgentBackEnd.Services
         bool Save();//helper method to check if the entity is being saved to DB successfully.
 
         bool IfVisitExist(int visitId);
-
+        bool IfProductExist(int productId);
+        bool IfTransactionExist(int transactionId);
         void SaveNewEntity<T>(T newEntity) where T : class;
 
         Visit GetVisit(int visitId);
+
+        Product GetProduct(int productId);
+
+        Transaction GetTransaction(int transactionId);
 
         InitialInfoDtos GetEntities();
 

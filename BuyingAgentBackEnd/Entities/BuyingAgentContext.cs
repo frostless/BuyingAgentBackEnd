@@ -6,10 +6,10 @@ namespace BuyingAgentBackEnd.Entities
     public class BuyingAgentContext : DbContext
     {
         public BuyingAgentContext(DbContextOptions<BuyingAgentContext> options)
-            :base(options)
+            : base(options)
         {
-            Database.EnsureCreated();
-           
+            Database.Migrate();
+
         }
         public DbSet<Transaction> Transactions { get; set; }
 

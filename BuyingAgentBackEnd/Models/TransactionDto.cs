@@ -16,6 +16,8 @@ namespace BuyingAgentBackEnd.Models
 
         public decimal Price { get; set; }
 
+        public decimal Profit { get; set; }
+
         public decimal Charged { get; set; }
 
         public int CustomerId { get; set; }

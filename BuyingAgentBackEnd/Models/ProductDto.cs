@@ -25,6 +25,8 @@ namespace BuyingAgentBackEnd.Models
 
         public int CategoryId { get; set; }
 
+        public decimal Profit { get; set; }
+
         public ICollection<int> TransactionIds { get; set; }
 
     }

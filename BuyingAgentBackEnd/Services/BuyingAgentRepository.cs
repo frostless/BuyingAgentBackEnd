@@ -30,7 +30,7 @@ namespace BuyingAgentBackEnd.Services
 
             List<TransactionProduct> transactionProducts = new List<TransactionProduct>();
 
-            foreach(var id in ProductIds)
+            foreach (var id in ProductIds)
             {
                 transactionProducts.Add(new TransactionProduct
                 {
@@ -43,12 +43,32 @@ namespace BuyingAgentBackEnd.Services
 
         public Visit GetVisit(int visitId)
         {
-            return _buyingAgentContext.Visits.FirstOrDefault(v=>v.Id==visitId);
+            return _buyingAgentContext.Visits.FirstOrDefault(v => v.Id == visitId);
         }
+
+        public Product GetProduct(int productId)
+        {
+            return _buyingAgentContext.Products.FirstOrDefault(v => v.Id == productId);
+        }
+
+        public Transaction GetTransaction(int transactionId)
+        {
+            return _buyingAgentContext.Transactions.FirstOrDefault(t => t.Id == transactionId);
+
+        }
+
 
         public bool IfVisitExist(int visitId)
         {
             return _buyingAgentContext.Visits.Any(v => v.Id == visitId);
+        }
+        public bool IfProductExist(int productId)
+        {
+            return _buyingAgentContext.Products.Any(p => p.Id == productId);
+        }
+        public bool IfTransactionExist(int transactionId)
+        {
+            return _buyingAgentContext.Transactions.Any(t => t.Id == transactionId);
         }
 
         public void SaveNewEntity<T>(T newEntity) where T : class
@@ -75,7 +95,8 @@ namespace BuyingAgentBackEnd.Services
                 var monthProfit = _buyingAgentContext.Transactions
                      .Where(t => t.TransactionTime.Year == year)
                      .Where(t => t.TransactionTime.Month == i);
-                decimal profit = monthProfit.Sum(x => x.Charged) - monthProfit.Sum(x => x.Price);
+                //decimal profit = monthProfit.Sum(x => x.Charged) - monthProfit.Sum(x => x.Price);
+                decimal profit = monthProfit.Sum(x => x.Profit);
                 monthsProfit[i.ToString()] = profit;
             }
             return monthsProfit;
@@ -94,7 +115,8 @@ namespace BuyingAgentBackEnd.Services
                 .Select(e =>
                 new
                 {
-                    profit = e.Sum(s => s.Charged) - e.Sum(s => s.Price),
+                    //profit = e.Sum(s => s.Charged) - e.Sum(s => s.Price),
+                    profit = e.Sum(s => s.Profit),
                     name = e.Key.Name,
                     province = e.Key.Province,
                     relationship = e.Key.Relationship,
@@ -123,7 +145,8 @@ namespace BuyingAgentBackEnd.Services
                                   price = g.Key.Price,
                                   barCode = g.Key.BarCode,
                                   imgUrl = g.Key.ImgUrl,
-                                  profit = g.Sum(p=>p.Charged) - g.Sum(p => p.Price)
+                                  profit = g.Sum(p => p.Profit)
+
                               }).OrderByDescending(x=>x.profit)
                                 .Take(1);
             IDictionary<string, string> productToReturn = _converter.Convert(topProduct);
@@ -161,7 +184,7 @@ namespace BuyingAgentBackEnd.Services
                            {
                               visit = g.Key.visit,
                               shop = g.Key.Shop,
-                              profit = g.Sum(p => p.Charged) - g.Sum(p => p.Price),
+                              profit = g.Sum(p => p.Profit),
                               timeElapsed = g.Key.FinishedTime - g.Key.StartedTime,
                               date = g.Key.StartedTime.Date
                            }).OrderByDescending(x => x.profit)
@@ -173,7 +196,7 @@ namespace BuyingAgentBackEnd.Services
         public decimal GetallProfit()
         {
             var transactions = _buyingAgentContext.Transactions;
-            decimal allProfit = transactions.Sum(t => t.Charged) - transactions.Sum(t => t.Price);
+            decimal allProfit = transactions.Sum(t => t.Profit);
             return allProfit;
         }
 
