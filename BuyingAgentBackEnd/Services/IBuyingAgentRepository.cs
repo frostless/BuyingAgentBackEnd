@@ -14,11 +14,14 @@ namespace BuyingAgentBackEnd.Services
         bool IfVisitExist(int visitId);
         bool IfProductExist(int productId);
         bool IfTransactionExist(int transactionId);
+        bool IfCustomerExist(int customerId);
         void SaveNewEntity<T>(T newEntity) where T : class;
 
         Visit GetVisit(int visitId);
 
         Product GetProduct(int productId);
+
+        Customer GetCustomer(int customerId);
 
         Transaction GetTransaction(int transactionId);
 

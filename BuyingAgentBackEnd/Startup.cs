@@ -25,7 +25,7 @@ namespace BuyingAgentBackEnd
                          .AddJsonFile(@"C:\Program Files\Amazon\ElasticBeanstalk\config\containerconfiguration", optional: true, reloadOnChange: true)
                          .AddEnvironmentVariables();
 
-            // This adds EB environment variables.
+            // This adds EB enviroment variables.
 
             builder.AddInMemoryCollection(DbCon.GetAwsDbConfig(builder.Build()));
 

@@ -21,7 +21,7 @@ namespace BuyingAgentBackEnd.Controllers
         }
 
 
-        [HttpPatch("visits/{visitId}")]
+        [HttpPatch("visit/{visitId}")]
         public IActionResult PartiallyUpdateVisit(int visitId,
             [FromBody] JsonPatchDocument<VisitDto> patchDoc)
         {
@@ -44,7 +44,7 @@ namespace BuyingAgentBackEnd.Controllers
             return NoContent();
 
         }
-        [HttpPatch("products/{productId}")]
+        [HttpPatch("product/{productId}")]
         public IActionResult PartiallyUpdateProduct(int productId,
             [FromBody] JsonPatchDocument<ProductDto> patchDoc)
         {
@@ -68,7 +68,7 @@ namespace BuyingAgentBackEnd.Controllers
 
         }
 
-        [HttpPatch("transactions/{transactionId}")]
+        [HttpPatch("transaction/{transactionId}")]
         public IActionResult PartiallyUpdateTransaction(int transactionId,
        [FromBody] JsonPatchDocument<TransactionDto> patchDoc)
         {
@@ -85,6 +85,30 @@ namespace BuyingAgentBackEnd.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             AutoMapper.Mapper.Map(transactionToPatch, transactionEntity);
+
+            if (!_buyingAgentRepository.Save()) return StatusCode(500, "A problem happened while handling your request.");
+
+            return NoContent();
+
+        }
+
+        [HttpPatch("customer/{customerId}")]
+        public IActionResult PartiallyUpdateCustomer(int customerId,
+     [FromBody] JsonPatchDocument<CustomerDto> patchDoc)
+        {
+            if (patchDoc == null) return BadRequest();
+
+            if (!_buyingAgentRepository.IfCustomerExist(customerId)) return NotFound();
+
+            var customerEntity = _buyingAgentRepository.GetCustomer(customerId);
+
+            var customerToPatch = AutoMapper.Mapper.Map<CustomerDto>(customerEntity);
+
+            patchDoc.ApplyTo(customerToPatch, ModelState);
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            AutoMapper.Mapper.Map(customerToPatch, customerEntity);
 
             if (!_buyingAgentRepository.Save()) return StatusCode(500, "A problem happened while handling your request.");
 

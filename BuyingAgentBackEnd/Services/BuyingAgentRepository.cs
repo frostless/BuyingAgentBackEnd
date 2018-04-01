@@ -57,6 +57,12 @@ namespace BuyingAgentBackEnd.Services
 
         }
 
+        public Customer GetCustomer(int customerId)
+        {
+            return _buyingAgentContext.Customers.FirstOrDefault(c => c.Id == customerId);
+
+        }
+
 
         public bool IfVisitExist(int visitId)
         {
@@ -69,6 +75,10 @@ namespace BuyingAgentBackEnd.Services
         public bool IfTransactionExist(int transactionId)
         {
             return _buyingAgentContext.Transactions.Any(t => t.Id == transactionId);
+        }
+        public bool IfCustomerExist(int customerId)
+        {
+            return _buyingAgentContext.Customers.Any(c => c.Id == customerId);
         }
 
         public void SaveNewEntity<T>(T newEntity) where T : class
