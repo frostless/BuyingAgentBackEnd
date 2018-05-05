@@ -35,7 +35,7 @@ namespace BuyingAgentBackEnd.Controllers
             // repository logic to save the new transaction
             _buyingAgentRepository.SaveNewEntity(transactionToSave);
             _buyingAgentRepository
-                .SaveNewTPWithTransaction(transactionToSave.Id, newTransaction.ProductsId);
+                .SaveNewTPWithTransaction(transactionToSave.Id, newTransaction.ProductInfo);
 
             if (!_buyingAgentRepository.Save())
             {

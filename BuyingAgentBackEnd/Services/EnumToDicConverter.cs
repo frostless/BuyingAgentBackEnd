@@ -17,7 +17,12 @@ namespace BuyingAgentBackEnd.Services
             {
                 foreach (PropertyInfo property in item.GetType().GetProperties())
                 {
-                   dicToReturn[property.Name] = property.GetValue(item, null).ToString();
+					var val = property.GetValue(item, null) != null ? property.GetValue(item, null) : null;
+					if (val!=null)
+					{
+						dicToReturn[property.Name] = property.GetValue(item, null).ToString();
+
+					}
                 }
             }
             return dicToReturn;

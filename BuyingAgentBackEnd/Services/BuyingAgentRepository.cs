@@ -24,18 +24,19 @@ namespace BuyingAgentBackEnd.Services
         }
 
 
-        public void SaveNewTPWithTransaction(int transactionId, ICollection<int> ProductIds)
+        public void SaveNewTPWithTransaction(int transactionId, IDictionary<int,int> ProductsInfo)
         {
-            if (ProductIds.Count == 0) return;
+            if (ProductsInfo.Count == 0) return;
 
             List<TransactionProduct> transactionProducts = new List<TransactionProduct>();
 
-            foreach (var id in ProductIds)
+            foreach (var info in ProductsInfo)
             {
                 transactionProducts.Add(new TransactionProduct
                 {
                     TransactionId = transactionId,
-                    ProductId = id
+                    ProductId = info.Key,
+					Qty = info.Value
                 });
             }
             _buyingAgentContext.TransactionProducts.AddRange(transactionProducts);
@@ -145,7 +146,7 @@ namespace BuyingAgentBackEnd.Services
                               on p.Id equals tp.ProductId
                               join c in _buyingAgentContext.Categories
                               on p.CategoryId equals c.Id
-                              group p by new {productName= p.Name, categoryName = c.Name,p.Charged,p.Price,p.BarCode,p.ImgUrl}
+                              group tp by new { tp.ProductId,productName = p.Name, categoryName = c.Name,p.Profit,p.Charged,p.Price,p.BarCode,p.ImgUrl}
                               into g
                               select new
                               {
@@ -155,11 +156,11 @@ namespace BuyingAgentBackEnd.Services
                                   price = g.Key.Price,
                                   barCode = g.Key.BarCode,
                                   imgUrl = g.Key.ImgUrl,
-                                  profit = g.Sum(p => p.Profit)
+								  profit = g.Sum(q => q.Qty) * g.Key.Profit
 
-                              }).OrderByDescending(x=>x.profit)
+							  }).OrderByDescending(x=>x.profit)
                                 .Take(1);
-            IDictionary<string, string> productToReturn = _converter.Convert(topProduct);
+			IDictionary<string, string> productToReturn = _converter.Convert(topProduct);
             return productToReturn;
         }
 

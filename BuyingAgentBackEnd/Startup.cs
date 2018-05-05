@@ -18,23 +18,24 @@ namespace BuyingAgentBackEnd
 
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                         .SetBasePath(env.ContentRootPath)
-                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                         .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                         .AddJsonFile(@"C:\Program Files\Amazon\ElasticBeanstalk\config\containerconfiguration", optional: true, reloadOnChange: true)
-                         .AddEnvironmentVariables();
+			var builder = new ConfigurationBuilder()
+						 .SetBasePath(env.ContentRootPath)
+						 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+						 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+						 .AddJsonFile(@"C:\Program Files\Amazon\ElasticBeanstalk\config\containerconfiguration", optional: true, reloadOnChange: true)
+						 .AddEnvironmentVariables();
 
-            // This adds EB environment variables.
+			// This adds EB environment variables.
 
-            builder.AddInMemoryCollection(DbCon.GetAwsDbConfig(builder.Build()));
+			builder.AddInMemoryCollection(DbCon.GetAwsDbConfig(builder.Build()));
 
-            //development version
-            //var builder = new ConfigurationBuilder()
-            //.SetBasePath(Directory.GetCurrentDirectory())
-            //.AddJsonFile("appsettings.json");
+			//development version
 
-            Configuration = builder.Build();
+			//var builder = new ConfigurationBuilder()
+			//.SetBasePath(Directory.GetCurrentDirectory())
+			//.AddJsonFile("appsettings.json");
+
+			Configuration = builder.Build();
 
         }
 
@@ -69,9 +70,9 @@ namespace BuyingAgentBackEnd
                 .AddMvcOptions(o => o.OutputFormatters.Add(
                   new XmlDataContractSerializerOutputFormatter()));
 
-            //var connectionString = Configuration["connectionString:BuyingAgentDBConnectionString"];
-            var connectionString = DbCon.GetRdsConnectionString(Configuration);
-            services.AddDbContext<BuyingAgentContext>(o => o.UseSqlServer(connectionString));
+			//var connectionString = Configuration["connectionString:BuyingAgentDBConnectionString"];
+			var connectionString = DbCon.GetRdsConnectionString(Configuration);
+			services.AddDbContext<BuyingAgentContext>(o => o.UseSqlServer(connectionString));
 
             services.AddScoped<IBuyingAgentRepository, BuyingAgentRepository>();
             services.AddScoped<EnumToDicConverter>();

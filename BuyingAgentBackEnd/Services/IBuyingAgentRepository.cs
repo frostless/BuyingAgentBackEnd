@@ -7,7 +7,7 @@ namespace BuyingAgentBackEnd.Services
     public interface IBuyingAgentRepository
     {
         //expect unique ProductIds
-        void SaveNewTPWithTransaction(int transactionId, ICollection<int> ProductIds);
+        void SaveNewTPWithTransaction(int transactionId, IDictionary<int,int> ProductsInfo);
     
         bool Save();//helper method to check if the entity is being saved to DB successfully.
 
