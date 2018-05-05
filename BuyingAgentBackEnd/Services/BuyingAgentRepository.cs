@@ -156,9 +156,8 @@ namespace BuyingAgentBackEnd.Services
                                   price = g.Key.Price,
                                   barCode = g.Key.BarCode,
                                   imgUrl = g.Key.ImgUrl,
-								  profit = g.Sum(q => q.Qty) * g.Key.Profit
-
-							  }).OrderByDescending(x=>x.profit)
+							      profit = g.Sum(q => q.Qty) * g.Key.Profit
+                              }).OrderByDescending(x=>x.profit)
                                 .Take(1);
 			IDictionary<string, string> productToReturn = _converter.Convert(topProduct);
             return productToReturn;
