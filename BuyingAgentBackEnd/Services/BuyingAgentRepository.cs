@@ -156,7 +156,7 @@ namespace BuyingAgentBackEnd.Services
                                   price = g.Key.Price,
                                   barCode = g.Key.BarCode,
                                   imgUrl = g.Key.ImgUrl,
-							      profit = g.Sum(q => q.Qty) * g.Key.Profit
+								  profit = g.Sum(q => q.Qty) * g.Key.Profit
                               }).OrderByDescending(x=>x.profit)
                                 .Take(1);
 			IDictionary<string, string> productToReturn = _converter.Convert(topProduct);
@@ -178,7 +178,7 @@ namespace BuyingAgentBackEnd.Services
                                expectedTime =g.Key.ExpectedTime,
                                transactionTimes =g.Count()
                            }).OrderByDescending(x => x.transactionTimes)
-                                .Take(1);
+						     .Take(1);
             IDictionary<string, string> postToReturn = _converter.Convert(topPost);
             return postToReturn;
         }
@@ -198,7 +198,7 @@ namespace BuyingAgentBackEnd.Services
                               timeElapsed = g.Key.FinishedTime - g.Key.StartedTime,
                               date = g.Key.StartedTime.Date
                            }).OrderByDescending(x => x.profit)
-                                .Take(1);
+						     .Take(1);
             IDictionary<string, string> visitToReturn = _converter.Convert(topVisit);
             return visitToReturn;
         }
