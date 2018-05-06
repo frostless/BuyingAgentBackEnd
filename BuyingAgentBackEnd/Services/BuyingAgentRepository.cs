@@ -13,7 +13,7 @@ namespace BuyingAgentBackEnd.Services
 		private EnumToDicConverter _converter;
 
 		public BuyingAgentRepository(BuyingAgentContext buyingAgentContext,
-									EnumToDicConverter converter)
+									 EnumToDicConverter converter)
 		{
 			_buyingAgentContext = buyingAgentContext;
 			_converter = converter;
@@ -179,7 +179,7 @@ namespace BuyingAgentBackEnd.Services
 							   expectedTime = g.Key.ExpectedTime,
 							   transactionTimes = g.Count()
 						   }).OrderByDescending(x => x.transactionTimes)
-							 .Take(1);
+                             .Take(1);
 			IDictionary<string, string> postToReturn = _converter.Convert(topPost);
 			return postToReturn;
 		}
