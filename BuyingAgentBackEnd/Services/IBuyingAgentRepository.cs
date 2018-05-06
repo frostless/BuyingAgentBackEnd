@@ -41,7 +41,9 @@ namespace BuyingAgentBackEnd.Services
 
         ICollection<Transaction> GetAllTransactions();
 
-        decimal GetallProfit();
+		ICollection<Visit> GetAllVisits();
+
+		decimal GetallProfit();
 
         int GetTranactionsNum();
 

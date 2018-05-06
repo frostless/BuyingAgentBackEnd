@@ -228,6 +228,13 @@ namespace BuyingAgentBackEnd.Services
 
 		}
 
+		public ICollection<Visit> GetAllVisits()
+		{
+
+			return _buyingAgentContext.Visits.OrderBy(t => t.Id).ToList();
+
+		}
+
 		public void DeleteEntity(int Id, string entity)
 		{
 			if (entity == "product")
