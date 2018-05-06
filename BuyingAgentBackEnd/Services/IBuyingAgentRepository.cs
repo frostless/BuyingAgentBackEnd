@@ -4,51 +4,51 @@ using System.Collections.Generic;
 
 namespace BuyingAgentBackEnd.Services
 {
-    public interface IBuyingAgentRepository
-    {
-        //expect unique ProductIds
-        void SaveNewTPWithTransaction(int transactionId, IDictionary<int,int> ProductsInfo);
-    
-        bool Save();//helper method to check if the entity is being saved to DB successfully.
+	public interface IBuyingAgentRepository
+	{
+		//expect unique ProductIds
+		void SaveNewTPWithTransaction(int transactionId, IDictionary<int, int> ProductsInfo);
 
-        bool IfVisitExist(int visitId);
-        bool IfProductExist(int productId);
-        bool IfTransactionExist(int transactionId);
-        bool IfCustomerExist(int customerId);
-        void SaveNewEntity<T>(T newEntity) where T : class;
+		bool Save();//helper method to check if the entity is being saved to DB successfully.
 
-        Visit GetVisit(int visitId);
+		bool IfVisitExist(int visitId);
+		bool IfProductExist(int productId);
+		bool IfTransactionExist(int transactionId);
+		bool IfCustomerExist(int customerId);
+		void SaveNewEntity<T>(T newEntity) where T : class;
 
-        Product GetProduct(int productId);
+		Visit GetVisit(int visitId);
 
-        Customer GetCustomer(int customerId);
+		Product GetProduct(int productId);
 
-        Transaction GetTransaction(int transactionId);
+		Customer GetCustomer(int customerId);
 
-        InitialInfoDtos GetEntities();
+		Transaction GetTransaction(int transactionId);
 
-        IDictionary<string, decimal> GetMonthsProfit(int year);
+		InitialInfoDtos GetEntities();
 
-        bool IfMonthsProfitExit(int year);
+		IDictionary<string, decimal> GetMonthsProfit(int year);
 
-        IDictionary<string, string> GetTopCustomer();
+		bool IfMonthsProfitExit(int year);
 
-        IDictionary<string, string> GetTopProduct();
+		IDictionary<string, string> GetTopCustomer();
 
-        IDictionary<string, string> GetTopPost();
+		IDictionary<string, string> GetTopProduct();
 
-        IDictionary<string, string> GetTopVisit();
+		IDictionary<string, string> GetTopPost();
 
-        ICollection<Transaction> GetAllTransactions();
+		IDictionary<string, string> GetTopVisit();
+
+		ICollection<Transaction> GetAllTransactions();
 
 		ICollection<Visit> GetAllVisits();
 
 		decimal GetallProfit();
 
-        int GetTranactionsNum();
+		int GetTranactionsNum();
 
-        int GetVisitsNum();
+		int GetVisitsNum();
 
-        void DeleteEntity(int Id,string entity);
-    }
+		void DeleteEntity(int Id, string entity);
+	}
 }
