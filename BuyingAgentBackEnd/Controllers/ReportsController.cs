@@ -81,5 +81,11 @@ namespace BuyingAgentBackEnd.Controllers
             var allTransactions = _buyingAgentRepository.GetAllTransactions();
             return Ok(allTransactions);
         }
-    }
+		[HttpGet("allVisits")]
+		public IActionResult allVisits()
+		{
+			var allVisits = _buyingAgentRepository.GetAllVisits();
+			return Ok(allVisits);
+		}
+	}
 }
