@@ -12,7 +12,7 @@ namespace BuyingAgentBackEnd.Models
         public DateTime TransactionTime { get; set; }
 
         [Required]
-        public IDictionary<int,int> ProductInfo { get; set; }
+        public IDictionary<int,int> ProductsInfo { get; set; }
 
         public decimal Price { get; set; }
 
