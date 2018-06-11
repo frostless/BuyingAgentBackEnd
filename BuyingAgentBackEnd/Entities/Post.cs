@@ -16,7 +16,7 @@ namespace BuyingAgentBackEnd.Entities
 
         public int ExpectedTime { get; set; } //Business Days
 
-        public int Price { get; set; } //Dollars/Kg
+        public decimal Price { get; set; } //Dollars/Kg
 
     }
 }
