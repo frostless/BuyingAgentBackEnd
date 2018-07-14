@@ -40,29 +40,6 @@ namespace BuyingAgentBackEnd
 
         }
 
-        //private Dictionary<string, string> GetAwsDbConfig(IConfiguration configuration)
-        //{
-        //    Dictionary<string, string> dict = new Dictionary<string, string>();
-
-        //    foreach (IConfigurationSection pair in configuration.GetSection("iis:env").GetChildren())
-        //    {
-        //        string[] keypair = pair.Value.Split(new[] { '=' }, 2);
-        //        dict.Add(keypair[0], keypair[1]);
-        //    }
-
-        //    return dict;
-        //}
-
-        //private string GetRdsConnectionString()
-        //{
-        //    string hostname = Configuration.GetValue<string>("RDS_HOSTNAME");
-        //    string port = Configuration.GetValue<string>("RDS_PORT");
-        //    string dbname = Configuration.GetValue<string>("RDS_DB_NAME");
-        //    string username = Configuration.GetValue<string>("RDS_USERNAME");
-        //    string password = Configuration.GetValue<string>("RDS_PASSWORD");
-
-        //    return $"Data Source={hostname},{port};Initial Catalog={dbname};User ID={username};Password={password};";
-        //}
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
