@@ -10,14 +10,20 @@ namespace BuyingAgentBackEnd.Controllers
     [Route("api/update")]
     public class UpdateExistingController : Controller
     {
-        private IBuyingAgentRepository _buyingAgentRepository;
-        private ILogger<UpdateExistingController> _logger;
+        private IBuyingAgentRead _buyingAgentRead;
+		private IBuyingAgentCheckIfSaved _buyingAgentIfSaved;
+		private IBuyingAgentCheckIfExisted _buyingAgentCheckIfExisted;
+		private ILogger<UpdateExistingController> _logger;
 
-        public UpdateExistingController(IBuyingAgentRepository buyingAgentRepository,
-            ILogger<UpdateExistingController> logger)
+        public UpdateExistingController(IBuyingAgentRead buyingAgentRead,
+										IBuyingAgentCheckIfSaved buyingAgentIfSaved,
+										IBuyingAgentCheckIfExisted buyingAgentCheckIfExisted,
+										ILogger<UpdateExistingController> logger)
         {
-            _buyingAgentRepository = buyingAgentRepository;
-            _logger = logger;
+			_buyingAgentRead = buyingAgentRead;
+			_buyingAgentIfSaved = buyingAgentIfSaved;
+			_buyingAgentCheckIfExisted = buyingAgentCheckIfExisted;
+			_logger = logger;
         }
 
 
@@ -27,9 +33,9 @@ namespace BuyingAgentBackEnd.Controllers
         {
             if (patchDoc == null) return BadRequest();
 
-            if (!_buyingAgentRepository.IfVisitExist(visitId)) return NotFound();
+            if (!_buyingAgentCheckIfExisted.IfVisitExist(visitId)) return NotFound();
 
-            var visitEntity = _buyingAgentRepository.GetVisit(visitId);
+            var visitEntity = _buyingAgentRead.GetVisit(visitId);
 
             var visitToPatch = AutoMapper.Mapper.Map<VisitDto>(visitEntity);
 
@@ -39,7 +45,7 @@ namespace BuyingAgentBackEnd.Controllers
 
             AutoMapper.Mapper.Map(visitToPatch, visitEntity);
 
-            if (!_buyingAgentRepository.Save()) return StatusCode(500, "A problem happened while handling your request.");
+            if (!_buyingAgentIfSaved.Save()) return StatusCode(500, "A problem happened while handling your request.");
 
             return NoContent();
 
@@ -50,9 +56,9 @@ namespace BuyingAgentBackEnd.Controllers
         {
             if (patchDoc == null) return BadRequest();
 
-            if (!_buyingAgentRepository.IfProductExist(productId)) return NotFound();
+            if (!_buyingAgentCheckIfExisted.IfProductExist(productId)) return NotFound();
 
-            var productEntity = _buyingAgentRepository.GetProduct(productId);
+            var productEntity = _buyingAgentRead.GetProduct(productId);
 
             var productToPatch = AutoMapper.Mapper.Map<ProductDto>(productEntity);
 
@@ -62,7 +68,7 @@ namespace BuyingAgentBackEnd.Controllers
 
             AutoMapper.Mapper.Map(productToPatch, productEntity);
 
-            if (!_buyingAgentRepository.Save()) return StatusCode(500, "A problem happened while handling your request.");
+            if (!_buyingAgentIfSaved.Save()) return StatusCode(500, "A problem happened while handling your request.");
 
             return NoContent();
 
@@ -74,9 +80,9 @@ namespace BuyingAgentBackEnd.Controllers
         {
             if (patchDoc == null) return BadRequest();
 
-            if (!_buyingAgentRepository.IfTransactionExist(transactionId)) return NotFound();
+            if (!_buyingAgentCheckIfExisted.IfTransactionExist(transactionId)) return NotFound();
 
-            var transactionEntity = _buyingAgentRepository.GetTransaction(transactionId);
+            var transactionEntity = _buyingAgentRead.GetTransaction(transactionId);
 
             var transactionToPatch = AutoMapper.Mapper.Map<TransactionDto>(transactionEntity);
 
@@ -86,7 +92,7 @@ namespace BuyingAgentBackEnd.Controllers
 
             AutoMapper.Mapper.Map(transactionToPatch, transactionEntity);
 
-            if (!_buyingAgentRepository.Save()) return StatusCode(500, "A problem happened while handling your request.");
+            if (!_buyingAgentIfSaved.Save()) return StatusCode(500, "A problem happened while handling your request.");
 
             return NoContent();
 
@@ -98,9 +104,9 @@ namespace BuyingAgentBackEnd.Controllers
         {
             if (patchDoc == null) return BadRequest();
 
-            if (!_buyingAgentRepository.IfCustomerExist(customerId)) return NotFound();
+            if (!_buyingAgentCheckIfExisted.IfCustomerExist(customerId)) return NotFound();
 
-            var customerEntity = _buyingAgentRepository.GetCustomer(customerId);
+            var customerEntity = _buyingAgentRead.GetCustomer(customerId);
 
             var customerToPatch = AutoMapper.Mapper.Map<CustomerDto>(customerEntity);
 
@@ -110,7 +116,7 @@ namespace BuyingAgentBackEnd.Controllers
 
             AutoMapper.Mapper.Map(customerToPatch, customerEntity);
 
-            if (!_buyingAgentRepository.Save()) return StatusCode(500, "A problem happened while handling your request.");
+            if (!_buyingAgentIfSaved.Save()) return StatusCode(500, "A problem happened while handling your request.");
 
             return NoContent();
 

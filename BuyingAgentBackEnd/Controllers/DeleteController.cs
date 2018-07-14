@@ -8,19 +8,22 @@ namespace BuyingAgentBackEnd.Controllers
     [Route("api/delete")]
     public class DeleteController : Controller
     {
-        private IBuyingAgentRepository _buyingAgentRepository;
-        private ILogger<AddNewController> _logger;
-        public DeleteController(IBuyingAgentRepository buyingAgentRepository,
-            ILogger<AddNewController> logger)
+        private IBuyingAgentDelete _buyingAgentDelete;
+		private IBuyingAgentCheckIfSaved _buyingAgentCheckIfSaved;
+		private ILogger<AddNewController> _logger;
+		public DeleteController(IBuyingAgentDelete buyingAgentDelete,
+								ILogger<AddNewController> logger,
+								IBuyingAgentCheckIfSaved buyingAgentCheckIfSaved)
         {
-            _buyingAgentRepository = buyingAgentRepository;
+			_buyingAgentDelete = buyingAgentDelete;
             _logger = logger;
-        }
+			_buyingAgentCheckIfSaved = buyingAgentCheckIfSaved;
+		}
         [HttpDelete]
         public IActionResult DeleteEntity([FromBody] DeleteEntity deleteEntity)
         {
-            _buyingAgentRepository.DeleteEntity(deleteEntity.Id, deleteEntity.Entity);
-            if (!_buyingAgentRepository.Save())
+			_buyingAgentDelete.DeleteEntity(deleteEntity.Id, deleteEntity.Entity);
+            if (!_buyingAgentCheckIfSaved.Save())
             {
                 return StatusCode(500, "A problem happened while handling your request.");
             }

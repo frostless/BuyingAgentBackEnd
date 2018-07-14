@@ -1,10 +1,8 @@
-﻿using BuyingAgentBackEnd.Entities;
-using BuyingAgentBackEnd.Models;
+﻿using BuyingAgentBackEnd.Models;
 using BuyingAgentBackEnd.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
+
 
 
 namespace BuyingAgentBackEnd.Controllers
@@ -12,14 +10,17 @@ namespace BuyingAgentBackEnd.Controllers
     [Route("api/addnew")]
     public class AddNewController : Controller
     {
-        private IBuyingAgentRepository _buyingAgentRepository;
+        private IBuyingAgentCheckIfSaved _buyingAgentCheckIfSaved;
+		private IBuyingAgentSave _buyingAgentSave;
         private ILogger<AddNewController> _logger;
 
-        public AddNewController(IBuyingAgentRepository buyingAgentRepository,
-            ILogger<AddNewController> logger)
+        public AddNewController(IBuyingAgentCheckIfSaved buyingAgentCheckIfSaved,
+								IBuyingAgentSave buyingAgentSave,
+								ILogger<AddNewController> logger)
         {
-            _buyingAgentRepository = buyingAgentRepository;
-            _logger = logger;
+			_buyingAgentCheckIfSaved = buyingAgentCheckIfSaved;
+			_buyingAgentSave = buyingAgentSave;
+			_logger = logger;
         }
 
         [HttpPost("newtransaction", Name = "SaveNewTransaction")]
@@ -32,12 +33,12 @@ namespace BuyingAgentBackEnd.Controllers
 
             var transactionToSave = AutoMapper.Mapper.Map<Entities.Transaction>(newTransaction);
 
-            // repository logic to save the new transaction
-            _buyingAgentRepository.SaveNewEntity(transactionToSave);
-            _buyingAgentRepository
-                .SaveNewTPWithTransaction(transactionToSave.Id, newTransaction.ProductsInfo);
+			// repository logic to save the new transaction
+			_buyingAgentSave.SaveNewEntity(transactionToSave);
+			_buyingAgentSave
+				.SaveNewTPWithTransaction(transactionToSave.Id, newTransaction.ProductsInfo);
 
-            if (!_buyingAgentRepository.Save())
+            if (!_buyingAgentCheckIfSaved.Save())
             {
                 return StatusCode(500, "A problem happened while handling your request.");
             }
@@ -46,9 +47,7 @@ namespace BuyingAgentBackEnd.Controllers
 
             return Ok(new
             {transactionToReturn });
-
         }
-
 
         [HttpPost("newcustomer", Name = "SaveNewCustomer")]
         public IActionResult NewCustomer(
@@ -60,9 +59,9 @@ namespace BuyingAgentBackEnd.Controllers
 
             var customerToSave = AutoMapper.Mapper.Map<Entities.Customer>(newCustomer);
 
-            _buyingAgentRepository.SaveNewEntity(customerToSave);
+			_buyingAgentSave.SaveNewEntity(customerToSave);
 
-            if (!_buyingAgentRepository.Save())
+            if (!_buyingAgentCheckIfSaved.Save())
             {
                 return StatusCode(500, "A problem happened while handling your request.");
             }
@@ -83,9 +82,9 @@ namespace BuyingAgentBackEnd.Controllers
 
             var postToSave = AutoMapper.Mapper.Map<Entities.Post>(newPost);
 
-            _buyingAgentRepository.SaveNewEntity(postToSave);
+			_buyingAgentSave.SaveNewEntity(postToSave);
 
-            if (!_buyingAgentRepository.Save())
+            if (!_buyingAgentCheckIfSaved.Save())
             {
                 return StatusCode(500, "A problem happened while handling your request.");
             }
@@ -106,9 +105,9 @@ namespace BuyingAgentBackEnd.Controllers
 
             var visitToSave = AutoMapper.Mapper.Map<Entities.Visit>(newVisit);
 
-            _buyingAgentRepository.SaveNewEntity(visitToSave);
+			_buyingAgentSave.SaveNewEntity(visitToSave);
 
-            if (!_buyingAgentRepository.Save())
+            if (!_buyingAgentCheckIfSaved.Save())
             {
                 return StatusCode(500, "A problem happened while handling your request.");
             }
@@ -128,10 +127,10 @@ namespace BuyingAgentBackEnd.Controllers
 
             var productToSave = AutoMapper.Mapper.Map<Entities.Product>(newProduct);
 
-            _buyingAgentRepository.SaveNewEntity(productToSave);
+			_buyingAgentSave.SaveNewEntity(productToSave);
         
 
-            if (!_buyingAgentRepository.Save())
+            if (!_buyingAgentCheckIfSaved.Save())
             {
                 return StatusCode(500, "A problem happened while handling your request.");
             }
@@ -152,9 +151,9 @@ namespace BuyingAgentBackEnd.Controllers
 
             var categoryToSave = AutoMapper.Mapper.Map<Entities.Category>(newCategory);
 
-            _buyingAgentRepository.SaveNewEntity(categoryToSave);
+			_buyingAgentSave.SaveNewEntity(categoryToSave);
 
-            if (!_buyingAgentRepository.Save())
+            if (!_buyingAgentCheckIfSaved.Save())
             {
                 return StatusCode(500, "A problem happened while handling your request.");
             }
@@ -164,8 +163,30 @@ namespace BuyingAgentBackEnd.Controllers
             return Ok(new { id = categoryToSave.Id, categoryToReturn });
         }
 
+		[HttpPost("newShop", Name = "SaveNewShop")]
+		public IActionResult NewShop(
+   [FromBody] ShopDto newShop)
+		{
+			if (newShop == null) return BadRequest();
 
-    }
+			if (!ModelState.IsValid) return BadRequest(ModelState);
+
+			var shopToSave = AutoMapper.Mapper.Map<Entities.Shop>(newShop);
+
+			_buyingAgentSave.SaveNewEntity(shopToSave);
+
+			if (!_buyingAgentCheckIfSaved.Save())
+			{
+				return StatusCode(500, "A problem happened while handling your request.");
+			}
+
+			var shopToReturn = AutoMapper.Mapper.Map<Models.ShopDto>(shopToSave);
+
+			return Ok(new { id = shopToSave.Id, shopToReturn });
+		}
+
+
+	}
 
 
 }

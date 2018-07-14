@@ -7,20 +7,20 @@ namespace BuyingAgentBackEnd.Controllers
     [Route("api/InitialInfo")]
     public class InitialInfoController : Controller
     {
-        private IBuyingAgentRepository _buyingAgentRepository;
+        private IBuyingAgentReports _buyingAgentReports;
         private ILogger<InitialInfoController> _logger;
 
-        public InitialInfoController(IBuyingAgentRepository buyingAgentRepository,
+        public InitialInfoController(IBuyingAgentReports buyingAgentReports,
                                      ILogger<InitialInfoController> logger
                                      )
         {
-            _buyingAgentRepository = buyingAgentRepository;
+			_buyingAgentReports = buyingAgentReports;
             _logger = logger;
         }
         [HttpGet]
         public IActionResult Index()
         {
-            var infoToDisplay = _buyingAgentRepository.GetEntities();
+            var infoToDisplay = _buyingAgentReports.GetEntities();
             return Ok(infoToDisplay);
         }
     }
