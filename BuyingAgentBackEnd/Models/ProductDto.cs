@@ -6,12 +6,13 @@ namespace BuyingAgentBackEnd.Models
     public class ProductDto
     {
 
-        [Required]
-        public string Name { get; set; }
+		[Required]
+		[MaxLength(100)]
+		public string Name { get; set; }
 
-        [Required]
-        [MaxLength(200)]
-        public string Description { get; set; }
+		[Required]
+		[MaxLength(300)]
+		public string Description { get; set; }
 
         public decimal Price { get; set; }
 
@@ -19,15 +20,14 @@ namespace BuyingAgentBackEnd.Models
 
         public string BarCode { get; set; }
 
-        public string ImgUrl { get; set; }
+		[MaxLength(100)]
+		public string ImgUrl { get; set; }
 
         public int TransactionId { get; set; }
 
         public int CategoryId { get; set; }
 
         public decimal Profit { get; set; }
-
-        public ICollection<int> TransactionIds { get; set; }
 
     }
 }

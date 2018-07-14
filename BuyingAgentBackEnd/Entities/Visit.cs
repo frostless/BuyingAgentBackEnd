@@ -15,7 +15,10 @@ namespace BuyingAgentBackEnd.Entities
 
         public DateTime FinishedTime { get; set; }
 
-        public string Shop { get; set; }
+		//many-to-one relationship referencing Category table
+		[ForeignKey("ShopId")]
+		public Shop Shop { get; set; }
+		public int? ShopId { get; set; }
 
-    }
+	}
 }

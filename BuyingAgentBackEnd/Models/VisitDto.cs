@@ -13,8 +13,7 @@ namespace BuyingAgentBackEnd.Models
 
         public DateTime FinishedTime { get; set; }
 
-        [MaxLength(200)]
-        public string Shop { get; set; }
+        public int ShopId { get; set; }
 
     }
 }

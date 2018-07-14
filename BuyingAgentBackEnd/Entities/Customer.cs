@@ -11,13 +11,17 @@ namespace BuyingAgentBackEnd.Entities
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+		[MaxLength(100)]
+		public string Name { get; set; }
 
-        public string Province { get; set; }
+		[MaxLength(100)]
+		public string Province { get; set; }
 
-        public string Gender { get; set; }
+		[MaxLength(50)]
+		public string Gender { get; set; }
 
-        public string Relationship { get; set; }
+		[MaxLength(50)]
+		public string Relationship { get; set; }
 
         public DateTime CustomerSince { get; set; }
 

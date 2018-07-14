@@ -13,10 +13,11 @@ namespace BuyingAgentBackEnd.Entities
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+		[MaxLength(100)]
+		public string Name { get; set; }
         
         [Required]
-        [MaxLength(200)]
+        [MaxLength(300)]
         public string Description { get; set; }
 
         public decimal Price { get; set; }
@@ -27,9 +28,10 @@ namespace BuyingAgentBackEnd.Entities
 
         public decimal Profit { get; set; }
 
-        public string ImgUrl { get; set; }
+		[MaxLength(100)]
+		public string ImgUrl { get; set; }
 
-        //many-to-many relationshio to join table TransactionProduct
+        //many-to-many relationshiop to join table TransactionProduct
 
         public ICollection<TransactionProduct> TransactionProducts { get; set; }
 

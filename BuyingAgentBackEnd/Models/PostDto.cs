@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BuyingAgentBackEnd.Models
 {
     public class PostDto
     {
-        public string Type { get; set; }
+		[MaxLength(50)]
+		public string Type { get; set; }
 
-        public string Brand { get; set; }
+		[MaxLength(50)]
+		public string Brand { get; set; }
 
         public int ExpectedTime { get; set; } //Business days
 

@@ -11,6 +11,8 @@ namespace BuyingAgentBackEnd.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+		[MaxLength(100)]
+		[Required]
         public string Name { get; set; }
 
     }

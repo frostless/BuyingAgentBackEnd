@@ -10,9 +10,11 @@ namespace BuyingAgentBackEnd.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string Type { get; set; }
+		[MaxLength(50)]
+		public string Type { get; set; }
 
-        public string Brand { get; set; }
+		[MaxLength(50)]
+		public string Brand { get; set; }
 
         public int ExpectedTime { get; set; } //Business Days
 

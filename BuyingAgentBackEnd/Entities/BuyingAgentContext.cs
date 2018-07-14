@@ -23,7 +23,9 @@ namespace BuyingAgentBackEnd.Entities
 
         public DbSet<Visit> Visits { get; set; }
 
-        public DbSet<TransactionProduct> TransactionProducts { get; set; }
+		public DbSet<Shop> Shops { get; set; }
+
+		public DbSet<TransactionProduct> TransactionProducts { get; set; }
 
         //composit key for the joint table product category
 
@@ -32,14 +34,15 @@ namespace BuyingAgentBackEnd.Entities
             modelBuilder.Entity<TransactionProduct>()
                 .HasKey(t => new { t.TransactionId, t.ProductId });
 
-            //modelBuilder.Entity<ProductCategory>()
-            //    .HasOne(pc => pc.Product)
-            //    .WithMany("ProductCategories");
 
-            //modelBuilder.Entity<ProductCategory>()
-            //    .HasOne(pc => pc.Category)
-            //    .WithMany("ProductCategories");
-        }
+			//modelBuilder.Entity<ProductCategory>()
+			//	.HasOne(pc => pc.Product)
+			//	.WithMany("ProductCategories");
 
-    }
+			//modelBuilder.Entity<ProductCategory>()
+			//    .HasOne(pc => pc.Category)
+			//    .WithMany("ProductCategories");
+		}
+
+	}
 }
