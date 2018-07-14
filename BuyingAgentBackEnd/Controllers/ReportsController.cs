@@ -91,11 +91,11 @@ namespace BuyingAgentBackEnd.Controllers
 			return Ok(allVisits);
 		}
 
-		[HttpGet("formularProfit")]
-		public IActionResult formularProfit()
+		[HttpGet("formulaProfit")]
+		public IActionResult formulaProfit()
 		{
-			var formularProfit = _buyingAgentReports.GetFormulaProfit();
-			return Ok(formularProfit);
+			var formulaProfit = _buyingAgentReports.GetFormulaProfit();
+			return Ok(formulaProfit);
 		}
 
 		[HttpGet("supplementsProfit")]
