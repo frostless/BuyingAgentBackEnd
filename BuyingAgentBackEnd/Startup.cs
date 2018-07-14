@@ -29,6 +29,7 @@ namespace BuyingAgentBackEnd
 
 			builder.AddInMemoryCollection(DbCon.GetAwsDbConfig(builder.Build()));
 
+
 			//development version
 
 			//var builder = new ConfigurationBuilder()
@@ -74,8 +75,14 @@ namespace BuyingAgentBackEnd
 			var connectionString = DbCon.GetRdsConnectionString(Configuration);
 			services.AddDbContext<BuyingAgentContext>(o => o.UseSqlServer(connectionString));
 
-            services.AddScoped<IBuyingAgentRepository, BuyingAgentRepository>();
-            services.AddScoped<EnumToDicConverter>();
+			//services.AddScoped<IBuyingAgentRepository, BuyingAgentRepository>(); // to delete
+			services.AddScoped<IBuyingAgentDelete, BuyingAgentDelete>();
+			services.AddScoped<IBuyingAgentCheckIfSaved, BuyingAgentCheckIfSaved>();
+			services.AddScoped<IBuyingAgentCheckIfExisted, BuyingAgentCheckIfExisted>();
+			services.AddScoped<IBuyingAgentSave, BuyingAgentSave>();
+			services.AddScoped<IBuyingAgentReports, BuyingAgentReports>();
+			services.AddScoped<IBuyingAgentRead, BuyingAgentRead>();
+			services.AddScoped<EnumToDicConverter>();
             services.AddScoped<DbCon>();
 
             //enabled CORS
@@ -128,7 +135,8 @@ namespace BuyingAgentBackEnd
                 cfg.CreateMap<Models.ProductDto, Entities.Product>();
                 cfg.CreateMap<Entities.Category, Models.CategoryDto>();
                 cfg.CreateMap<Models.CategoryDto, Entities.Category>();
-            });
+				cfg.CreateMap<Models.ShopDto, Entities.Shop>();
+			});
 
             app.UseMvc();
 
