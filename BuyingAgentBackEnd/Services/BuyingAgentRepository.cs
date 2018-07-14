@@ -189,12 +189,14 @@ namespace BuyingAgentBackEnd.Services
 			var topVisit = (from t in _buyingAgentContext.Transactions
 							join v in _buyingAgentContext.Visits
 							on t.VisitId equals v.Id
-							group t by new { visit = v.Id, v.Shop, v.StartedTime, v.FinishedTime }
+							join s in _buyingAgentContext.Shops
+							on v.ShopId equals s.Id
+							group t by new { visit = v.Id, ShopName = s.Name, v.StartedTime, v.FinishedTime }
 							into g
 							select new
 							{
 								visit = g.Key.visit,
-								shop = g.Key.Shop,
+								shop = g.Key.ShopName,
 								profit = g.Sum(p => p.Profit),
 								timeElapsed = g.Key.FinishedTime - g.Key.StartedTime,
 								date = g.Key.StartedTime.Date
