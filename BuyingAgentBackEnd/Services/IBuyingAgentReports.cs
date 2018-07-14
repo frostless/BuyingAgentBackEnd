@@ -1,0 +1,36 @@
+﻿using BuyingAgentBackEnd.Entities;
+using BuyingAgentBackEnd.Models;
+using System.Collections.Generic;
+
+namespace BuyingAgentBackEnd.Services
+{
+    public interface IBuyingAgentReports
+    {
+		decimal GetallProfit();
+
+		int GetTranactionsNum();
+
+		int GetVisitsNum();
+
+		decimal GetFormulaProfit();
+
+		decimal GetSupplementsProfit();
+
+		IDictionary<string, string> GetTopCustomer();
+
+		IDictionary<string, string> GetTopProduct();
+
+		IDictionary<string, string> GetTopPost();
+
+		IDictionary<string, string> GetTopVisit();
+
+		ICollection<Transaction> GetAllTransactions();
+
+		ICollection<Visit> GetAllVisits();
+
+		InitialInfoDtos GetEntities();
+
+		IDictionary<string, decimal> GetMonthsProfit(int year);
+
+	}
+}
