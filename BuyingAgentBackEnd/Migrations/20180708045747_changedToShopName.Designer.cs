@@ -11,9 +11,10 @@ using System;
 namespace BuyingAgentBackEnd.Migrations
 {
     [DbContext(typeof(BuyingAgentContext))]
-    partial class BuyingAgentContextModelSnapshot : ModelSnapshot
+    [Migration("20180708045747_changedToShopName")]
+    partial class changedToShopName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +26,7 @@ namespace BuyingAgentBackEnd.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -41,18 +40,14 @@ namespace BuyingAgentBackEnd.Migrations
 
                     b.Property<DateTime>("CustomerSince");
 
-                    b.Property<string>("Gender")
-                        .HasMaxLength(50);
+                    b.Property<string>("Gender");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                        .IsRequired();
 
-                    b.Property<string>("Province")
-                        .HasMaxLength(100);
+                    b.Property<string>("Province");
 
-                    b.Property<string>("Relationship")
-                        .HasMaxLength(50);
+                    b.Property<string>("Relationship");
 
                     b.HasKey("Id");
 
@@ -64,15 +59,13 @@ namespace BuyingAgentBackEnd.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Brand")
-                        .HasMaxLength(50);
+                    b.Property<string>("Brand");
 
                     b.Property<int>("ExpectedTime");
 
                     b.Property<decimal>("Price");
 
-                    b.Property<string>("Type")
-                        .HasMaxLength(50);
+                    b.Property<string>("Type");
 
                     b.HasKey("Id");
 
@@ -92,14 +85,12 @@ namespace BuyingAgentBackEnd.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(300);
+                        .HasMaxLength(200);
 
-                    b.Property<string>("ImgUrl")
-                        .HasMaxLength(100);
+                    b.Property<string>("ImgUrl");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 
@@ -117,18 +108,13 @@ namespace BuyingAgentBackEnd.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(100);
+                    b.Property<string>("Address");
 
-                    b.Property<string>("ContactNo")
-                        .HasMaxLength(50);
+                    b.Property<string>("ContactNo");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                    b.Property<string>("Name");
 
-                    b.Property<string>("WeChatNo")
-                        .HasMaxLength(50);
+                    b.Property<string>("WeChatNo");
 
                     b.HasKey("Id");
 
@@ -187,13 +173,11 @@ namespace BuyingAgentBackEnd.Migrations
 
                     b.Property<DateTime>("FinishedTime");
 
-                    b.Property<int?>("ShopId");
+                    b.Property<string>("ShopName");
 
                     b.Property<DateTime>("StartedTime");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ShopId");
 
                     b.ToTable("Visits");
                 });
@@ -235,13 +219,6 @@ namespace BuyingAgentBackEnd.Migrations
                         .WithMany("TransactionProducts")
                         .HasForeignKey("TransactionId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("BuyingAgentBackEnd.Entities.Visit", b =>
-                {
-                    b.HasOne("BuyingAgentBackEnd.Entities.Shop", "Shop")
-                        .WithMany()
-                        .HasForeignKey("ShopId");
                 });
 #pragma warning restore 612, 618
         }
