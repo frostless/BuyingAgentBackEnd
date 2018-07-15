@@ -173,25 +173,17 @@ namespace BuyingAgentBackEnd.Services
 		{
 			int categoryId = _buyingAgentContext.Categories.Where(c => c.Name == "baby formula").First().Id;
 
-			decimal formulaProfit = (from tp in _buyingAgentContext.TransactionProducts
-								 join t in _buyingAgentContext.Transactions
-								 on tp.TransactionId equals t.Id
-								 join p in _buyingAgentContext.Products
-								 on tp.ProductId equals p.Id
-								 join c in _buyingAgentContext.Categories
-								 on p.CategoryId equals c.Id
-								 where c.Id == categoryId
-								 group t by new { c.Id }
-								 into g
-								 select new {profit = g.Sum(t => t.Profit)}).First().profit;
-			return formulaProfit;
-		}
+			var groupedTP = (from tp in _buyingAgentContext.TransactionProducts
+							 group tp by new { tp.TransactionId }
+							 into g
+							 select new
+							 {
+								 TransactionId = g.Key.TransactionId,
+								 ProductId = g.Min(TransactionProduct => TransactionProduct.ProductId)
+							 }
+						);
 
-		public decimal GetSupplementsProfit()
-		{
-			int categoryId = _buyingAgentContext.Categories.Where(c => c.Name == "Supplements").First().Id;
-
-			decimal supplementsProfit = (from tp in _buyingAgentContext.TransactionProducts
+			decimal formulaProfit = (from tp in groupedTP
 									 join t in _buyingAgentContext.Transactions
 									 on tp.TransactionId equals t.Id
 									 join p in _buyingAgentContext.Products
@@ -200,8 +192,36 @@ namespace BuyingAgentBackEnd.Services
 									 on p.CategoryId equals c.Id
 									 where c.Id == categoryId
 									 group t by new { c.Id }
-								 into g
+									 into g
 									 select new { profit = g.Sum(t => t.Profit) }).First().profit;
+			return formulaProfit;
+		}
+
+		public decimal GetSupplementsProfit()
+		{
+			int categoryId = _buyingAgentContext.Categories.Where(c => c.Name == "Supplements").First().Id;
+
+			var groupedTP = (from tp in _buyingAgentContext.TransactionProducts
+							 group tp by new { tp.TransactionId }
+							 into g
+							 select new
+							 {
+								 TransactionId = g.Key.TransactionId,
+								 ProductId = g.Min(TransactionProduct => TransactionProduct.ProductId)
+							 }
+						 );
+
+			decimal supplementsProfit = (from tp in groupedTP
+										 join t in _buyingAgentContext.Transactions
+										 on tp.TransactionId equals t.Id
+										 join p in _buyingAgentContext.Products
+										 on tp.ProductId equals p.Id
+										 join c in _buyingAgentContext.Categories
+										 on p.CategoryId equals c.Id
+										 where c.Id == categoryId
+										 group t by new { c.Id }
+										 into g
+										 select new { profit = g.Sum(t => t.Profit) }).First().profit;
 			return supplementsProfit;
 		}
 	}
