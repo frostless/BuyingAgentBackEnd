@@ -11,9 +11,10 @@ using System;
 namespace BuyingAgentBackEnd.Migrations
 {
     [DbContext(typeof(BuyingAgentContext))]
-    partial class BuyingAgentContextModelSnapshot : ModelSnapshot
+    [Migration("20180715035506_barCodeRestriction")]
+    partial class barCodeRestriction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

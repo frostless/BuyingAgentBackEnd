@@ -24,7 +24,8 @@ namespace BuyingAgentBackEnd.Entities
 
         public decimal Charged { get; set; }
 
-        public string BarCode { get; set; }
+		[MaxLength(100)]
+		public string BarCode { get; set; }
 
         public decimal Profit { get; set; }
 
