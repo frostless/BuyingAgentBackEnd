@@ -4,10 +4,10 @@ namespace BuyingAgentBackEnd.Models
 {
     public class PostDto
     {
-		[MaxLength(50)]
+		[MaxLength(200)]
 		public string Type { get; set; }
 
-		[MaxLength(50)]
+		[MaxLength(200)]
 		public string Brand { get; set; }
 
         public int ExpectedTime { get; set; } //Business days

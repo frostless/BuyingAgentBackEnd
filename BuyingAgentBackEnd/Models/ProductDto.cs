@@ -7,11 +7,11 @@ namespace BuyingAgentBackEnd.Models
     {
 
 		[Required]
-		[MaxLength(100)]
+		[MaxLength(300)]
 		public string Name { get; set; }
 
 		[Required]
-		[MaxLength(300)]
+		[MaxLength(500)]
 		public string Description { get; set; }
 
         public decimal Price { get; set; }
@@ -20,7 +20,7 @@ namespace BuyingAgentBackEnd.Models
 
         public string BarCode { get; set; }
 
-		[MaxLength(100)]
+		[MaxLength(500)]
 		public string ImgUrl { get; set; }
 
         public int TransactionId { get; set; }

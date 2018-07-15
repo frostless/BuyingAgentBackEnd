@@ -27,7 +27,7 @@ namespace BuyingAgentBackEnd.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 
@@ -42,17 +42,17 @@ namespace BuyingAgentBackEnd.Migrations
                     b.Property<DateTime>("CustomerSince");
 
                     b.Property<string>("Gender")
-                        .HasMaxLength(50);
+                        .HasMaxLength(200);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(200);
 
                     b.Property<string>("Province")
-                        .HasMaxLength(100);
+                        .HasMaxLength(200);
 
                     b.Property<string>("Relationship")
-                        .HasMaxLength(50);
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 
@@ -65,14 +65,14 @@ namespace BuyingAgentBackEnd.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Brand")
-                        .HasMaxLength(50);
+                        .HasMaxLength(200);
 
                     b.Property<int>("ExpectedTime");
 
                     b.Property<decimal>("Price");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(50);
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 
@@ -92,14 +92,14 @@ namespace BuyingAgentBackEnd.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(300);
+                        .HasMaxLength(500);
 
                     b.Property<string>("ImgUrl")
-                        .HasMaxLength(100);
+                        .HasMaxLength(500);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(300);
 
                     b.Property<decimal>("Price");
 
@@ -118,17 +118,17 @@ namespace BuyingAgentBackEnd.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")
-                        .HasMaxLength(100);
+                        .HasMaxLength(300);
 
                     b.Property<string>("ContactNo")
-                        .HasMaxLength(50);
+                        .HasMaxLength(100);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20);
+                        .HasMaxLength(100);
 
                     b.Property<string>("WeChatNo")
-                        .HasMaxLength(50);
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 

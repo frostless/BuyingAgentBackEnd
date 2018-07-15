@@ -4,7 +4,7 @@ namespace BuyingAgentBackEnd.Models
 {
     public class CategoryDto
     {
-		[MaxLength(100)]
+		[MaxLength(200)]
 		[Required]
 		public string Name { get; set; }
 
