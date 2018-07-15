@@ -191,7 +191,7 @@ namespace BuyingAgentBackEnd.Services
 		{
 			int categoryId = _buyingAgentContext.Categories.Where(c => c.Name == "Supplements").First().Id;
 
-			decimal formulaProfit = (from tp in _buyingAgentContext.TransactionProducts
+			decimal supplementsProfit = (from tp in _buyingAgentContext.TransactionProducts
 									 join t in _buyingAgentContext.Transactions
 									 on tp.TransactionId equals t.Id
 									 join p in _buyingAgentContext.Products
@@ -202,7 +202,7 @@ namespace BuyingAgentBackEnd.Services
 									 group t by new { c.Id }
 								 into g
 									 select new { profit = g.Sum(t => t.Profit) }).First().profit;
-			return formulaProfit;
+			return supplementsProfit;
 		}
 	}
 }
