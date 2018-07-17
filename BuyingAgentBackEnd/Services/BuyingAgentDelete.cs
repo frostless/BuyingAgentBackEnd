@@ -48,6 +48,12 @@ namespace BuyingAgentBackEnd.Services
 				if (entityToDelete == null) return;
 				_buyingAgentContext.Visits.Remove(entityToDelete);
 			}
+			else if (entity == "transaction")
+			{
+				var entityToDelete = _buyingAgentContext.Transactions.FirstOrDefault(t => t.Id == Id);
+				if (entityToDelete == null) return;
+				_buyingAgentContext.Transactions.Remove(entityToDelete);
+			}
 
 		}
 	}
