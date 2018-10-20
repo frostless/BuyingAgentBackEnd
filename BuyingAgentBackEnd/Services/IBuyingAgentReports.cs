@@ -18,8 +18,6 @@ namespace BuyingAgentBackEnd.Services
 
 		IDictionary<string, string> GetTopCustomer();
 
-		ICollection<IDictionary<string, string>> GetTopFiveCustomers();
-
 		IDictionary<string, string> GetTopProduct();
 
 		IDictionary<string, string> GetTopPost();

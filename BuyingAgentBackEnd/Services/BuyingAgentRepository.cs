@@ -136,7 +136,7 @@ namespace BuyingAgentBackEnd.Services
 								customerSince = e.Key.CustomerSince
 							}).OrderByDescending(x => x.profit)
 							  .Take(1);
-			IDictionary<string, string> customerToReturn = _converter.Convert(topCustomer).First();
+			IDictionary<string, string> customerToReturn = _converter.Convert(topCustomer);
 			return customerToReturn;
 		}
 
@@ -160,7 +160,7 @@ namespace BuyingAgentBackEnd.Services
 								  profit = g.Sum(q => q.Qty) * g.Key.Profit
 							  }).OrderByDescending(x => x.profit)
 								.Take(1);
-			IDictionary<string, string> productToReturn = _converter.Convert(topProduct).First();
+			IDictionary<string, string> productToReturn = _converter.Convert(topProduct);
 			return productToReturn;
 		}
 
@@ -180,7 +180,7 @@ namespace BuyingAgentBackEnd.Services
 							   transactionTimes = g.Count()
 						   }).OrderByDescending(x => x.transactionTimes)
                              .Take(1);
-			IDictionary<string, string> postToReturn = _converter.Convert(topPost).First();
+			IDictionary<string, string> postToReturn = _converter.Convert(topPost);
 			return postToReturn;
 		}
 
@@ -202,7 +202,7 @@ namespace BuyingAgentBackEnd.Services
 								date = g.Key.StartedTime.Date
 							}).OrderByDescending(x => x.profit)
 							  .Take(1);
-			IDictionary<string, string> visitToReturn = _converter.Convert(topVisit).First();
+			IDictionary<string, string> visitToReturn = _converter.Convert(topVisit);
 			return visitToReturn;
 		}
 
