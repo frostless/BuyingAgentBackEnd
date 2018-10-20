@@ -29,7 +29,6 @@ namespace BuyingAgentBackEnd
 
 			builder.AddInMemoryCollection(DbCon.GetAwsDbConfig(builder.Build()));
 
-
 			//development version
 
 			//var builder = new ConfigurationBuilder()
