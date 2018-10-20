@@ -99,8 +99,29 @@ namespace BuyingAgentBackEnd.Services
 								customerSince = e.Key.CustomerSince
 							}).OrderByDescending(x => x.profit)
 							  .Take(1);
-			IDictionary<string, string> customerToReturn = _converter.Convert(topCustomer);
+			IDictionary<string, string> customerToReturn = _converter.Convert(topCustomer).First();
 			return customerToReturn;
+		}
+
+		public ICollection<IDictionary<string, string>> GetTopFiveCustomers()
+		{
+			var topFiveCustomer = _buyingAgentContext.Transactions
+							.Include(e => e.Customer)
+							.GroupBy(e => e.Customer)
+							.Select(e =>
+							new
+							{
+								//profit = e.Sum(s => s.Charged) - e.Sum(s => s.Price),
+								profit = e.Sum(s => s.Profit),
+								name = e.Key.Name,
+								province = e.Key.Province,
+								relationship = e.Key.Relationship,
+								gender = e.Key.Gender,
+								customerSince = e.Key.CustomerSince
+							}).OrderByDescending(x => x.profit)
+							  .Take(5);
+			ICollection<IDictionary<string, string>> customersToReturn = _converter.Convert(topFiveCustomer);	
+			return customersToReturn;
 		}
 
 		public IDictionary<string, string> GetTopProduct()
@@ -123,7 +144,7 @@ namespace BuyingAgentBackEnd.Services
 								  profit = g.Sum(q => q.Qty) * g.Key.Profit
 							  }).OrderByDescending(x => x.profit)
 								.Take(1);
-			IDictionary<string, string> productToReturn = _converter.Convert(topProduct);
+			IDictionary<string, string> productToReturn = _converter.Convert(topProduct).First();
 			return productToReturn;
 		}
 
@@ -143,7 +164,7 @@ namespace BuyingAgentBackEnd.Services
 							   transactionTimes = g.Count()
 						   }).OrderByDescending(x => x.transactionTimes)
 							 .Take(1);
-			IDictionary<string, string> postToReturn = _converter.Convert(topPost);
+			IDictionary<string, string> postToReturn = _converter.Convert(topPost).First();
 			return postToReturn;
 		}
 
@@ -165,7 +186,7 @@ namespace BuyingAgentBackEnd.Services
 								date = g.Key.StartedTime.Date
 							}).OrderByDescending(x => x.profit)
 							  .Take(1);
-			IDictionary<string, string> visitToReturn = _converter.Convert(topVisit);
+			IDictionary<string, string> visitToReturn = _converter.Convert(topVisit).First();
 			return visitToReturn;
 		}
 

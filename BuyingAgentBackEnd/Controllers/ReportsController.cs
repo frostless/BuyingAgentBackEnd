@@ -39,6 +39,13 @@ namespace BuyingAgentBackEnd.Controllers
 			return Ok(topCustomer);
 		}
 
+		[HttpGet("topFiveCustomers")]
+		public IActionResult topFiveCustomers()
+		{
+			var topCustomer = _buyingAgentReports.GetTopFiveCustomers();
+			return Ok(topCustomer);
+		}
+
 		[HttpGet("topProduct")]
 		public IActionResult topProduct()
 		{
