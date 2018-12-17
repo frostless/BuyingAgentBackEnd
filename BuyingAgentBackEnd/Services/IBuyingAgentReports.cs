@@ -30,6 +30,12 @@ namespace BuyingAgentBackEnd.Services
 
 		ICollection<Visit> GetAllVisits();
 
+		ICollection<Product> GetAllProducts();
+
+		ICollection<Category> GetAllCategories();
+
+		ICollection<Customer> GetAllCustomers();
+
 		InitialInfoDtos GetEntities();
 
 		IDictionary<string, decimal> GetMonthsProfit(int year);

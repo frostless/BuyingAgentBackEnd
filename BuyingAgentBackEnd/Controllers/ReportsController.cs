@@ -85,17 +85,40 @@ namespace BuyingAgentBackEnd.Controllers
 		{
 			return Ok(_buyingAgentReports.GetVisitsNum());
 		}
+
 		[HttpGet("allTransactions")]
 		public IActionResult allTransactions()
 		{
 			var allTransactions = _buyingAgentReports.GetAllTransactions();
 			return Ok(allTransactions);
 		}
+
 		[HttpGet("allVisits")]
 		public IActionResult allVisits()
 		{
 			var allVisits = _buyingAgentReports.GetAllVisits();
 			return Ok(allVisits);
+		}
+
+		[HttpGet("allProducts")]
+		public IActionResult allProducts()
+		{
+			var allProducts = _buyingAgentReports.GetAllProducts();
+			return Ok(allProducts);
+		}
+
+		[HttpGet("allCategories")]
+		public IActionResult allCategories()
+		{
+			var allCategories = _buyingAgentReports.GetAllCategories();
+			return Ok(allCategories);
+		}
+
+		[HttpGet("allCustomers")]
+		public IActionResult allCustomers()
+		{
+			var allCustomers = _buyingAgentReports.GetAllCustomers();
+			return Ok(allCustomers);
 		}
 
 		[HttpGet("formulaProfit")]

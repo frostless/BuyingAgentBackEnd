@@ -73,7 +73,28 @@ namespace BuyingAgentBackEnd.Services
 		public ICollection<Visit> GetAllVisits()
 		{
 
-			return _buyingAgentContext.Visits.OrderBy(t => t.Id).ToList();
+			return _buyingAgentContext.Visits.OrderBy(v => v.Id).ToList();
+
+		}
+
+		public ICollection<Product> GetAllProducts()
+		{
+
+			return _buyingAgentContext.Products.OrderBy(p => p.Id).ToList();
+
+		}
+
+		public ICollection<Category> GetAllCategories()
+		{
+
+			return _buyingAgentContext.Categories.OrderBy(c => c.Id).ToList();
+
+		}
+
+		public ICollection<Customer> GetAllCustomers()
+		{
+
+			return _buyingAgentContext.Customers.OrderBy(c => c.Id).ToList();
 
 		}
 
