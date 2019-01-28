@@ -1,14 +1,15 @@
 ﻿using BuyingAgentBackEnd.Models;
 using BuyingAgentBackEnd.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
 
 
 namespace BuyingAgentBackEnd.Controllers
 {
     [Route("api/addnew")]
-    public class AddNewController : Controller
+	[Authorize]
+	public class AddNewController : Controller
     {
         private IBuyingAgentCheckIfSaved _buyingAgentCheckIfSaved;
 		private IBuyingAgentSave _buyingAgentSave;
@@ -185,8 +186,6 @@ namespace BuyingAgentBackEnd.Controllers
 			return Ok(new { id = shopToSave.Id, shopToReturn });
 		}
 
-
 	}
-
 
 }

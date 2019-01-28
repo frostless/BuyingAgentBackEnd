@@ -1,6 +1,5 @@
-﻿using BuyingAgentBackEnd.Entities;
-using BuyingAgentBackEnd.Models;
-using BuyingAgentBackEnd.Services;
+﻿using BuyingAgentBackEnd.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,6 +7,7 @@ using System;
 namespace BuyingAgentBackEnd.Controllers
 {
 	[Route("api/reports")]
+	[Authorize]
 	public class ReportsController : Controller
 	{
 		private IBuyingAgentReports _buyingAgentReports;
@@ -119,6 +119,20 @@ namespace BuyingAgentBackEnd.Controllers
 		{
 			var allCustomers = _buyingAgentReports.GetAllCustomers();
 			return Ok(allCustomers);
+		}
+
+		[HttpGet("allShops")]
+		public IActionResult allShops()
+		{
+			var allShops = _buyingAgentReports.GetAllShops();
+			return Ok(allShops);
+		}
+
+		[HttpGet("allPosts")]
+		public IActionResult allPosts()
+		{
+			var allPosts = _buyingAgentReports.GetAllPosts();
+			return Ok(allPosts);
 		}
 
 		[HttpGet("formulaProfit")]

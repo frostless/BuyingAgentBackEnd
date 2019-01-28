@@ -8,13 +8,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using BuyingAgentBackEnd.Services;
 using System.IO;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace BuyingAgentBackEnd
 {
     public class Startup
     {
-        //need configuration to access the appSetting.json to get the db connection string
-        public static IConfiguration Configuration { get; private set; }
+		//need configuration to access the appSetting.json to get the db connection string
+		public static IConfiguration Configuration { get; private set; }
 
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
@@ -43,7 +44,16 @@ namespace BuyingAgentBackEnd
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
+			services.AddAuthentication("Bearer")
+			 .AddIdentityServerAuthentication(options =>
+			 {
+				 options.Authority = "https://identity.buyingagentapp.com/";
+				 options.RequireHttpsMetadata = false;
+
+				 options.ApiName = "buyingAgentAPI";
+			 });
+
+			services.AddMvc()
                 .AddMvcOptions(o => o.OutputFormatters.Add(
                   new XmlDataContractSerializerOutputFormatter()));
 
@@ -51,7 +61,6 @@ namespace BuyingAgentBackEnd
 			var connectionString = DbCon.GetRdsConnectionString(Configuration);
 			services.AddDbContext<BuyingAgentContext>(o => o.UseSqlServer(connectionString));
 
-			//services.AddScoped<IBuyingAgentRepository, BuyingAgentRepository>(); // to delete
 			services.AddScoped<IBuyingAgentDelete, BuyingAgentDelete>();
 			services.AddScoped<IBuyingAgentCheckIfSaved, BuyingAgentCheckIfSaved>();
 			services.AddScoped<IBuyingAgentCheckIfExisted, BuyingAgentCheckIfExisted>();
@@ -76,26 +85,14 @@ namespace BuyingAgentBackEnd
             {
                 app.UseDeveloperExceptionPage();
             }
-
             else
             {
                 app.UseExceptionHandler();
             }
-            app.UseCors(builder =>
+
+			app.UseCors(builder =>
                 builder.AllowAnyOrigin().AllowAnyMethod());
             app.UseStatusCodePages();
-
-            //app.Use(async (context, next) =>
-            //{
-            //    await next();
-            //    if (context.Response.StatusCode == 404 &&
-            //       !Path.HasExtension(context.Request.Path.Value) &&
-            //       !context.Request.Path.Value.StartsWith("/api/"))
-            //    {
-            //        context.Request.Path = "/index.html";
-            //        await next();
-            //    }
-            //});
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
@@ -114,10 +111,9 @@ namespace BuyingAgentBackEnd
 				cfg.CreateMap<Models.ShopDto, Entities.Shop>();
 			});
 
-            app.UseMvc();
+			app.UseAuthentication();
 
-            //app.UseDefaultFiles();
-            //app.UseStaticFiles();
+			app.UseMvc();
 
         }
     }

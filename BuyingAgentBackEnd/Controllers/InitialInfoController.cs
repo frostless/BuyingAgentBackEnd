@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BuyingAgentBackEnd.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BuyingAgentBackEnd.Controllers
 {
     [Route("api/InitialInfo")]
-    public class InitialInfoController : Controller
+	[Authorize]
+	public class InitialInfoController : Controller
     {
         private IBuyingAgentReports _buyingAgentReports;
         private ILogger<InitialInfoController> _logger;

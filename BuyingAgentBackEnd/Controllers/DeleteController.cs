@@ -1,12 +1,14 @@
 ﻿using BuyingAgentBackEnd.Models;
 using BuyingAgentBackEnd.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace BuyingAgentBackEnd.Controllers
 {
     [Route("api/delete")]
-    public class DeleteController : Controller
+	[Authorize]
+	public class DeleteController : Controller
     {
         private IBuyingAgentDelete _buyingAgentDelete;
 		private IBuyingAgentCheckIfSaved _buyingAgentCheckIfSaved;

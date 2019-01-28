@@ -98,6 +98,20 @@ namespace BuyingAgentBackEnd.Services
 
 		}
 
+		public ICollection<Shop> GetAllShops()
+		{
+
+			return _buyingAgentContext.Shops.OrderBy(s => s.Id).ToList();
+
+		}
+
+		public ICollection<Post> GetAllPosts()
+		{
+
+			return _buyingAgentContext.Posts.OrderBy(p => p.Id).ToList();
+
+		}
+
 		public bool IfMonthsProfitExit(int year)
 		{
 			return _buyingAgentContext.Transactions.Any(t => t.TransactionTime.Year == year);
