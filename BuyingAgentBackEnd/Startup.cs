@@ -7,12 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using BuyingAgentBackEnd.Services;
-using System.IO;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace BuyingAgentBackEnd
 {
-    public class Startup
+	public class Startup
     {
 		//need configuration to access the appSetting.json to get the db connection string
 		public static IConfiguration Configuration { get; private set; }
@@ -47,7 +45,7 @@ namespace BuyingAgentBackEnd
 			services.AddAuthentication("Bearer")
 			 .AddIdentityServerAuthentication(options =>
 			 {
-				 options.Authority = "https://identity.buyingagentapp.com/";
+				 options.Authority = "https://identity.buyingagentapp.com";
 				 options.RequireHttpsMetadata = false;
 
 				 options.ApiName = "buyingAgentAPI";
@@ -96,17 +94,17 @@ namespace BuyingAgentBackEnd
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Entities.Transaction, Models.TransactionDto>();
+                cfg.CreateMap<Transaction, Models.TransactionDto>();
                 cfg.CreateMap<Models.TransactionDto, Entities.Transaction>();
-                cfg.CreateMap<Entities.Customer, Models.CustomerDto>();
+                cfg.CreateMap<Customer, Models.CustomerDto>();
                 cfg.CreateMap<Models.CustomerDto, Entities.Customer>();
-                cfg.CreateMap<Entities.Post, Models.PostDto>();
+                cfg.CreateMap<Post, Models.PostDto>();
                 cfg.CreateMap<Models.PostDto, Entities.Post>();
-                cfg.CreateMap<Entities.Visit, Models.VisitDto>();
+                cfg.CreateMap<Visit, Models.VisitDto>();
                 cfg.CreateMap<Models.VisitDto, Entities.Visit>();
-                cfg.CreateMap<Entities.Product, Models.ProductDto>();
+                cfg.CreateMap<Product, Models.ProductDto>();
                 cfg.CreateMap<Models.ProductDto, Entities.Product>();
-                cfg.CreateMap<Entities.Category, Models.CategoryDto>();
+                cfg.CreateMap<Category, Models.CategoryDto>();
                 cfg.CreateMap<Models.CategoryDto, Entities.Category>();
 				cfg.CreateMap<Models.ShopDto, Entities.Shop>();
 			});
