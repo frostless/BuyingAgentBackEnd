@@ -6,6 +6,7 @@
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <RootNamespace>BuyingAgentBackEnd</RootNamespace>
     <AssemblyName>BuyingAgentBackEnd</AssemblyName>
+    <UserSecretsId>fcfedc11-5eaa-4ca0-94a7-6ce7e2dfc48b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

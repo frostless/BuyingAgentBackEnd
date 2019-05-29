@@ -1,16 +1,19 @@
 
 {
     "comment" : "This file is used to help set default values when using the dotnet CLI extension Amazon.ElasticBeanstalk.Tools. For more information run \"dotnet eb --help\" from the project root.",
-    "profile" : "BuyingAgent",
+    "profile" : "BuyingAgent New",
     "region"  : "ap-southeast-2",
-    "application" : "BuyingAgentBackEnd",
-    "environment" : "buyingagentba-9tmjk-env",
-    "cname"       : "buyingagentbackend-dev",
-    "solution-stack" : "64bit Windows Server 2016 v1.2.0 running IIS 10.0",
+    "application" : "BuyingAgent",
+    "environment" : "Buyingagent-env",
+    "cname"       : "buyingagentbackend-prod",
+    "solution-stack" : "64bit Windows Server 2016 v2.0.3 running IIS 10.0",
     "environment-type" : "SingleInstance",
     "instance-type"    : "t2.micro",
-    "key-pair"         : "",
+    "key-pair"         : "buyingagent",
     "iis-website"      : "Default Web Site",
     "app-path"         : "/",
-    "enable-xray"      : false
+    "enable-xray"      : false,
+    "health-check-url" : "/",
+    "instance-profile" : "aws-elasticbeanstalk-ec2-role",
+    "service-role"     : "aws-elasticbeanstalk-service-role"
 }
