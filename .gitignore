@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/QuickstartIdentityServer/updateUI.ps1
+/QuickstartIdentityServer/tempkey.rsa
+/QuickstartIdentityServer/log.txt
